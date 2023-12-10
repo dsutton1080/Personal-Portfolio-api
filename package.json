@@ -1,0 +1,20 @@
+{
+  "name": "personal-portfolio-api",
+  "version": "1.0.0",
+  "description": "This project consists of the controllers and routes that will be used to retrieve the data for my personal portfolio website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "DeRon Sutton",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mssql": "^10.0.1",
+    "swagger-ui-express": "^5.0.0",
+    "yamljs": "^0.3.0"
+  },
+  "devDependencies": {
+    "dotenv": "^16.3.1"
+  }
+}
