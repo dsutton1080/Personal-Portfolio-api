@@ -37,3 +37,16 @@ A list of technologies used in this project:
 - Azure SQL Server - Used for database operations
 - Express
 - Prisma 
+
+
+### Prisma Commands 
+
+Initialize prisma with `npm prisma init`. This command creates a new prisma directory in your project with the files: 
+- schema.prisma: Specifies your database connection and contains the database schema
+- .env: Defines environment variables (used for the database connection)
+
+Generate Prisma Client based on your database schema with `npx prisma generate`. 
+
+Run Prisma Migrations (if applicable) with `npx prisma migrate dev --preview-feature`
+
+Start the application with `node app.js`
