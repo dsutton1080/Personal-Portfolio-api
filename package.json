@@ -4,7 +4,9 @@
   "description": "This project consists of the controllers and routes that will be used to retrieve the data for my personal portfolio website",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "debug": "nodemon --inspect index.js"
   },
   "author": "DeRon Sutton",
   "license": "ISC",
@@ -17,6 +19,7 @@
   },
   "devDependencies": {
     "dotenv": "^16.3.1",
+    "nodemon": "^3.0.2",
     "prisma": "^5.7.0"
   }
 }
