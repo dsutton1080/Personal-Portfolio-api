@@ -35,7 +35,7 @@ app.post("/signup", async (request, response) => {
     response.send(responseUser);
 });
 
-app.post("/login", async (request, response) => {
+app.post("/login", async (request, response) => { // This endpoint needs security improvements (e.g. JWT)
     const userEmail = request.query.email;
     const userPassword = request.query.password;
     const user = await prisma.user.findUnique({
@@ -52,21 +52,33 @@ app.post("/login", async (request, response) => {
 });
 
 app.get("/user", async (request, response) => {
-    const userID = Number(request.params.id);
+    const userID = request.query.id;
     const user = await prisma.user.findUnique({
-        where: { id: userID }
+        where: { 
+            id: parseInt(userID)
+        }
     });
     response.send(user);
 });
 
-app.patch("/user/:id", (request, response) => {
-    const user = request.body;
-    console.log(user);
-    response.send(user);
+app.patch("/user/:id", async (request, response) => {
+    const updatedUser = await prisma.user.update({
+        where: { id: parseInt(request.params.id) },
+        data: request.body,
+    });
+    response.send(updatedUser);
 });
 
-app.get("user/all", async (_request, response) => {
-    const users = await prisma.user.findMany();
+app.get("/user/all", async (_request, response) => {
+    const users = await prisma.user.findMany({
+        select: {
+            id: true,
+            firstName: true,
+            lastName: true,
+            email: true,
+            isAdmin: true
+        }
+    });
     response.send(users);
 });
 
