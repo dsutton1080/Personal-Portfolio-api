@@ -47,6 +47,6 @@ Initialize prisma with `npm prisma init`. This command creates a new prisma dire
 
 Generate Prisma Client based on your database schema with `npx prisma generate`. 
 
-Run Prisma Migrations (if applicable) with `npx prisma migrate dev --name feature-name`
+Run Prisma Migrations after making changes to prisma schema with `npx prisma migrate dev --name feature-name`
 
 Start the application with `node app.js`

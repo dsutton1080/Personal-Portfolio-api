@@ -21,3 +21,24 @@ model User {
   lastName String?
   isAdmin Boolean @default(true)
 }
+
+// Section to Content is a one to many relationship
+
+model Section {
+  id      Int      @id @default(autoincrement())
+  name    String   @unique
+  order Int?
+  isTitle Boolean @default(false)
+  isHeader Boolean @default(false)
+  isSubHeader Boolean @default(false)
+  group String?
+  contents Content[]
+}
+
+model Content {
+  id Int @id @default(autoincrement())
+  content String
+  order Int?
+  section Section @relation(fields: [section_id], references: [id])
+  section_id Int
+}
