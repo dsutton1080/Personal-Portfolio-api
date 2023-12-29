@@ -12,16 +12,16 @@ const skillsRoutes = require("./routes/skillsRoutes");
 
 app.use(cors()); // This will set the Access-Control-Allow-Origin header to *
 app.use(express.json());
-app.use(userRoutes);
-app.use(sectionRoutes);
-app.use(contentRoutes);
-app.use(skillsRoutes);
+app.use("/user", userRoutes);
+app.use("/section", sectionRoutes);
+app.use("/content", contentRoutes);
+app.use("/skills", skillsRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 
-app.get("/status", (_request, response) => {
+router.get("/status", (_request, response) => {
   const status = {
     status: "OK",
     timestamp: new Date(),
