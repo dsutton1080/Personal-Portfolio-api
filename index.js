@@ -21,7 +21,7 @@ app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 
-router.get("/status", (_request, response) => {
+app.get("/status", (_request, response) => {
   const status = {
     status: "OK",
     timestamp: new Date(),
