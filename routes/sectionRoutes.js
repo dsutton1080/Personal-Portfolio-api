@@ -6,11 +6,13 @@ const prisma = new PrismaClient();
 router.get("/all", async (_request, response) => {
   const sections = await prisma.section.findMany({
     select: {
+      id: true,
       title: true,
       header: true,
       subHeader: true,
       contents: {
         select: {
+          id: true,
           content: true,
         },
         orderBy: {
@@ -31,6 +33,11 @@ router.get("/all", async (_request, response) => {
   response.send(groupedSections);
 });
 
+router.get("/count", async (_request, response) => {
+  const count = await prisma.section.count();
+  response.send(count.toString());
+});
+
 router.get("/:id", async (request, response) => {
   const sectionID = request.query.id;
   const section = await prisma.section.findUnique({
@@ -44,7 +51,12 @@ router.get("/:id", async (request, response) => {
 router.post("", async (request, response) => {
   const section = request.body;
   const responseSection = await prisma.section.create({
-    data: section,
+    data: {
+      ...section,
+      contents: {
+        create: section.contents.records,
+      },
+    },
   });
   response.send(responseSection);
 });
