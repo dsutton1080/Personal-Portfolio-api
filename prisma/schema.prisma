@@ -39,3 +39,15 @@ model Skills {
   order Int?
   name  String @default("New Skill")
 }
+
+model AboutMe {
+  id           Int    @id @default(autoincrement())
+  emailLink    String @default("dsutton1080@gmail.com")
+  linkedInLink String @default("")
+  githubLink   String @default("")
+  contentOne   String @default("")
+  contentTwo   String @default("")
+  contentThree String @default("")
+  contentFour  String @default("")
+  contentFive  String @default("")
+}
