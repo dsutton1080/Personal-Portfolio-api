@@ -1,44 +1,53 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Enter in npx prisma for Usage help
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlserver"
-  url      = env("DATABASE_URL")
+  provider          = "sqlserver"
+  url               = env("DATABASE_URL")
   shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
 model User {
-  id      Int      @id @default(autoincrement())
-  email   String   @unique
-  password String  @default("")
-  firstName    String?
-  lastName String?
-  isAdmin Boolean @default(true)
+  id        Int     @id @default(autoincrement())
+  email     String  @unique
+  firstName String?
+  isAdmin   Boolean @default(true)
+  lastName  String?
+  password  String  @default("")
 }
 
-// Section to Content is a one to many relationship
-
 model Section {
-  id      Int      @id @default(autoincrement())
-  name    String   @unique
-  order Int?
-  isTitle Boolean @default(false)
-  isHeader Boolean @default(false)
-  isSubHeader Boolean @default(false)
-  group String?
-  contents Content[]
+  id        Int       @id @default(autoincrement())
+  order     Int?
+  title     String    @default("New Section")
+  header    String?
+  subHeader String?
+  contents  Content[]
 }
 
 model Content {
-  id Int @id @default(autoincrement())
-  content String
-  order Int?
-  section Section @relation(fields: [section_id], references: [id])
+  id         Int     @id @default(autoincrement())
+  content    String
+  order      Int?
+  section    Section @relation(fields: [section_id], references: [id])
   section_id Int
+}
+
+model Skills {
+  id    Int    @id @default(autoincrement())
+  order Int?
+  name  String @default("New Skill")
+}
+
+model AboutMe {
+  id           Int    @id @default(autoincrement())
+  emailLink    String @default("dsutton1080@gmail.com")
+  linkedInLink String @default("")
+  githubLink   String @default("")
+  contentOne   String @default("")
+  contentTwo   String @default("")
+  contentThree String @default("")
+  contentFour  String @default("")
+  contentFive  String @default("")
 }
