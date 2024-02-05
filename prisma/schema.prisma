@@ -34,10 +34,11 @@ model Content {
   section_id Int
 }
 
-model Skills {
-  id    Int    @id @default(autoincrement())
-  order Int?
-  name  String @default("New Skill")
+model Experience {
+  id      Int    @id @default(autoincrement())
+  title   String @default("New Experience")
+  content String @default("")
+  date    String @default("")
 }
 
 model AboutMe {
