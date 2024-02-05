@@ -1,9 +1,7 @@
-// userRoutes.js
 const express = require("express");
 const router = express.Router();
 const prisma = require("../prisma");
 
-// Path: controllers/content.js
 router.get("/content/all", async (_request, response) => {
 	const content = await prisma.content.findMany();
 	response.send(content);

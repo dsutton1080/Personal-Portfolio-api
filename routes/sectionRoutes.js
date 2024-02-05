@@ -31,12 +31,10 @@ router.get("/all", async (_request, response) => {
 
 	response.send(groupedSections);
 });
-
 router.get("/count", async (_request, response) => {
 	const count = await prisma.section.count();
 	response.send(count.toString());
 });
-
 router.get("/:id", async (request, response) => {
 	const sectionID = request.query.id;
 	const section = await prisma.section.findUnique({
@@ -46,7 +44,6 @@ router.get("/:id", async (request, response) => {
 	});
 	response.send(section);
 });
-
 router.post("", async (request, response) => {
 	const section = request.body;
 	const responseSection = await prisma.section.create({
@@ -59,7 +56,6 @@ router.post("", async (request, response) => {
 	});
 	response.send(responseSection);
 });
-
 router.patch("/:id", async (request, response) => {
 	const updatedSection = await prisma.section.update({
 		where: { id: parseInt(request.params.id) },
@@ -67,7 +63,6 @@ router.patch("/:id", async (request, response) => {
 	});
 	response.send(updatedSection);
 });
-
 router.delete("/:id", async (request, response) => {
 	const deletedSection = await prisma.section.delete({
 		where: { id: parseInt(request.params.id) },

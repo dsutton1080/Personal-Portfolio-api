@@ -15,7 +15,6 @@ router.post("/signup", async (request, response) => {
 	});
 	response.send(responseUser);
 });
-
 router.post("/login", async (request, response) => {
 	// This endpoint needs security improvements (e.g. JWT)
 	const userEmail = request.query.email;
@@ -31,7 +30,6 @@ router.post("/login", async (request, response) => {
 		response.send(user);
 	}
 });
-
 router.get("", async (request, response) => {
 	const userID = request.query.id;
 	const user = await prisma.user.findUnique({
@@ -41,7 +39,6 @@ router.get("", async (request, response) => {
 	});
 	response.send(user);
 });
-
 router.patch("/:id", async (request, response) => {
 	const updatedUser = await prisma.user.update({
 		where: { id: parseInt(request.params.id) },
@@ -49,7 +46,6 @@ router.patch("/:id", async (request, response) => {
 	});
 	response.send(updatedUser);
 });
-
 router.get("/all", async (_request, response) => {
 	const users = await prisma.user.findMany({
 		select: {
@@ -62,7 +58,6 @@ router.get("/all", async (_request, response) => {
 	});
 	response.send(users);
 });
-
 router.patch("/change-role/:id", async (request, response) => {
 	const updatedUser = await prisma.user.update({
 		where: { id: parseInt(request.params.id) },
