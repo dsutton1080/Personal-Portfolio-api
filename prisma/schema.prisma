@@ -41,18 +41,6 @@ model Experience {
   date    String @default("")
 }
 
-model AboutMe {
-  id           Int    @id @default(autoincrement())
-  emailLink    String @default("dsutton1080@gmail.com")
-  linkedInLink String @default("")
-  githubLink   String @default("")
-  contentOne   String @default("")
-  contentTwo   String @default("")
-  contentThree String @default("")
-  contentFour  String @default("")
-  contentFive  String @default("")
-}
-
 model Project {
   id        Int     @id @default(autoincrement())
   title     String  @default("New Project")
