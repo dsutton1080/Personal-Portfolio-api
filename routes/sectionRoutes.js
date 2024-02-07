@@ -23,9 +23,14 @@ router.get("/all", async (_request, response) => {
 			order: "asc",
 		},
 	});
-	// Group sections by title
 	const groupedSections = sections.reduce((grouped, section) => {
-		(grouped[section.title] = grouped[section.title] || []).push(section);
+		if (!grouped[section.title]) {
+			// This is the first section with this title
+			grouped[section.title] = [section];
+		} else {
+			// This is not the first section with this title, so set the title to an empty string
+			grouped[section.title].push({ ...section, title: "" });
+		}
 		return grouped;
 	}, {});
 
