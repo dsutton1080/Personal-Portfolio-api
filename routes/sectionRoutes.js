@@ -67,6 +67,10 @@ router.get("/:id", async (request, response) => {
 router.post("", async (request, response) => {
 	try {
 		const section = request.body;
+		if (!section.order) {
+			const count = await prisma.section.count();
+			section.order = count + 1;
+		}
 		const responseSection = await prisma.section.create({
 			data: {
 				...section,
