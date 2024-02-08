@@ -13,7 +13,7 @@ router.get("/all", async (_request, response) => {
 
 router.get("/:id", async (request, response) => {
 	try {
-		const experienceID = request.query.id;
+		const experienceID = request.params.id;
 		const experience = await prisma.experience.findUnique({
 			where: {
 				id: parseInt(experienceID),

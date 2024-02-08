@@ -1,5 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-arm64-openssl-3.0.x"]
 }
 
 datasource db {
@@ -30,7 +31,7 @@ model Content {
   id         Int     @id @default(autoincrement())
   content    String
   order      Int?
-  section    Section @relation(fields: [section_id], references: [id])
+  section    Section @relation(fields: [section_id], references: [id], onDelete: Cascade)
   section_id Int
 }
 

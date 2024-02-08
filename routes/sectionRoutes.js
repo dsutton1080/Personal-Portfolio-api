@@ -50,10 +50,44 @@ router.get("/count", async (_request, response) => {
 	}
 });
 
+router.get("/headers", async (_request, response) => {
+	try {
+		const headers = await prisma.section.findMany({
+			select: {
+				id: true,
+				header: true,
+			},
+			orderBy: {
+				order: "asc",
+			},
+		});
+		response.send(headers);
+	} catch (error) {
+		response.status(500).send(error.message);
+	}
+});
+
 router.get("/:id", async (request, response) => {
 	try {
-		const sectionID = request.query.id;
+		const sectionID = request.params.id;
 		const section = await prisma.section.findUnique({
+			select: {
+				id: true,
+				title: true,
+				header: true,
+				subHeader: true,
+				order: true,
+				contents: {
+					select: {
+						id: true,
+						content: true,
+						order: true,
+					},
+					orderBy: {
+						order: "asc",
+					},
+				},
+			},
 			where: {
 				id: parseInt(sectionID),
 			},
@@ -81,18 +115,37 @@ router.post("", async (request, response) => {
 		});
 		response.send(responseSection);
 	} catch (error) {
+		console.error(error);
 		response.status(500).send(error.message);
 	}
 });
 
 router.patch("/:id", async (request, response) => {
 	try {
+		const sectionID = request.params.id;
+		const { contents, ...section } = request.body;
 		const updatedSection = await prisma.section.update({
-			where: { id: parseInt(request.params.id) },
-			data: request.body,
+			where: { id: parseInt(sectionID) },
+			data: {
+				...section,
+				contents: {
+					upsert: contents.map((content) => ({
+						where: { id: content.id },
+						update: {
+							order: content.order,
+							content: content.content,
+						},
+						create: {
+							order: content.order,
+							content: content.content,
+						},
+					})),
+				},
+			},
 		});
 		response.send(updatedSection);
 	} catch (error) {
+		console.error(error);
 		response.status(500).send(error.message);
 	}
 });
