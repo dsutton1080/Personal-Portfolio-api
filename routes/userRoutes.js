@@ -48,6 +48,7 @@ router.get("", async (request, response) => {
 		});
 		response.send(user);
 	} catch (error) {
+		console.error(error);
 		response.status(500).send("Internal Server Error");
 	}
 });
@@ -77,6 +78,7 @@ router.get("/all", async (_request, response) => {
 		});
 		response.send(users);
 	} catch (error) {
+		console.error(error);
 		response.status(500).send("Internal Server Error");
 	}
 });
