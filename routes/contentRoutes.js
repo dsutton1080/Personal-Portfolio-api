@@ -5,8 +5,9 @@ const prisma = require("../prisma");
 router.get("/content/all", async (_request, response) => {
 	try {
 		const content = await prisma.content.findMany();
-		response.send(content);
+		response.status(200).send(content);
 	} catch (error) {
+		console.error(error);
 		response.status(500).send(error);
 	}
 });
@@ -19,8 +20,9 @@ router.get("/content/:id", async (request, response) => {
 				id: parseInt(contentID),
 			},
 		});
-		response.send(content);
+		response.status(200).send(content);
 	} catch (error) {
+		console.error(error);
 		response.status(500).send(error);
 	}
 });
@@ -31,8 +33,9 @@ router.post("/content", async (request, response) => {
 		const responseContent = await prisma.content.create({
 			data: content,
 		});
-		response.send(responseContent);
+		response.status(201).send(responseContent);
 	} catch (error) {
+		console.error(error);
 		response.status(500).send(error);
 	}
 });
@@ -43,8 +46,9 @@ router.patch("/content/:id", async (request, response) => {
 			where: { id: parseInt(request.params.id) },
 			data: request.body,
 		});
-		response.send(updatedContent);
+		response.status(200).send(updatedContent);
 	} catch (error) {
+		console.error(error);
 		response.status(500).send(error);
 	}
 });
@@ -54,8 +58,9 @@ router.delete("/content/:id", async (request, response) => {
 		const deletedContent = await prisma.content.delete({
 			where: { id: parseInt(request.params.id) },
 		});
-		response.send(deletedContent);
+		response.status(200).send(deletedContent);
 	} catch (error) {
+		console.error(error);
 		response.status(500).send(error);
 	}
 });

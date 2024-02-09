@@ -35,8 +35,9 @@ router.get("/all", async (_request, response) => {
 			return grouped;
 		}, {});
 
-		response.send(groupedSections);
+		response.status(200).send(groupedSections);
 	} catch (error) {
+		console.error(error);
 		response.status(500).send(error.message);
 	}
 });
@@ -44,8 +45,9 @@ router.get("/all", async (_request, response) => {
 router.get("/count", async (_request, response) => {
 	try {
 		const count = await prisma.section.count();
-		response.send(count.toString());
+		response.status(200).send(count.toString());
 	} catch (error) {
+		console.error(error);
 		response.status(500).send(error.message);
 	}
 });
@@ -61,8 +63,9 @@ router.get("/headers", async (_request, response) => {
 				order: "asc",
 			},
 		});
-		response.send(headers);
+		response.status(200).send(headers);
 	} catch (error) {
+		console.error(error);
 		response.status(500).send(error.message);
 	}
 });
@@ -92,8 +95,9 @@ router.get("/:id", async (request, response) => {
 				id: parseInt(sectionID),
 			},
 		});
-		response.send(section);
+		response.status(200).send(section);
 	} catch (error) {
+		console.error(error);
 		response.status(500).send(error.message);
 	}
 });
@@ -113,7 +117,7 @@ router.post("", async (request, response) => {
 				},
 			},
 		});
-		response.send(responseSection);
+		response.status(201).send(responseSection);
 	} catch (error) {
 		console.error(error);
 		response.status(500).send(error.message);
@@ -143,7 +147,7 @@ router.patch("/:id", async (request, response) => {
 				},
 			},
 		});
-		response.send(updatedSection);
+		response.status(200).send(updatedSection);
 	} catch (error) {
 		console.error(error);
 		response.status(500).send(error.message);
@@ -155,8 +159,9 @@ router.delete("/:id", async (request, response) => {
 		const deletedSection = await prisma.section.delete({
 			where: { id: parseInt(request.params.id) },
 		});
-		response.send(deletedSection);
+		response.status(200).send(deletedSection);
 	} catch (error) {
+		console.error(error);
 		response.status(500).send(error.message);
 	}
 });
