@@ -8,12 +8,12 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-What things you need to install the software and how to install them:
+What things you need to install the software:
 
-- Node.js
-- Azure SQL Server
+-   Node.js
+-   Azure SQL Server
 
-### Installing 
+### Installing
 
 A step by step series of examples that tell you how to get a development environment running:
 
@@ -28,25 +28,24 @@ AZURE_SQL_PORT=your_port
 AZURE_SQL_AUTHENTICATIONTYPE=your_auth_type
 ```
 
-
-### Built With 
+### Built With
 
 A list of technologies used in this project:
 
-- Node.js - The web framework used
-- Azure SQL Server - Used for database operations
-- Express
-- Prisma 
+-   Node.js - The web framework used
+-   Azure SQL Server - Used for database operations
+-   Express
+-   Prisma
 
+### Prisma Commands
 
-### Prisma Commands 
+Initialize prisma with `npm prisma init`. This command creates a new prisma directory in your project with the files:
 
-Initialize prisma with `npm prisma init`. This command creates a new prisma directory in your project with the files: 
-- schema.prisma: Specifies your database connection and contains the database schema
-- .env: Defines environment variables (used for the database connection)
+-   schema.prisma: Specifies your database connection and contains the database schema
+-   .env: Defines environment variables (used for the database connection)
 
-Generate Prisma Client based on your database schema with `npx prisma generate`. 
+Generate Prisma Client based on your database schema with `npx prisma generate`.
 
 Run Prisma Migrations after making changes to prisma schema with `npx prisma migrate dev --name feature-name`
 
-Start the application with `node app.js`
+Start the application with `node app.js` or `npm run debug` for debugging via nodemon

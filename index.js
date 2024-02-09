@@ -1,30 +1,31 @@
 const express = require("express");
 const cors = require("cors");
-const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient();
+const prisma = require("./prisma");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 const userRoutes = require("./routes/userRoutes");
 const sectionRoutes = require("./routes/sectionRoutes");
 const contentRoutes = require("./routes/contentRoutes");
-const skillsRoutes = require("./routes/skillsRoutes");
+const experienceRoutes = require("./routes/experienceRoutes");
+const projectRoutes = require("./routes/projectRoutes");
 
 app.use(cors()); // This will set the Access-Control-Allow-Origin header to *
 app.use(express.json());
 app.use("/user", userRoutes);
 app.use("/section", sectionRoutes);
 app.use("/content", contentRoutes);
-app.use("/skills", skillsRoutes);
+app.use("/experience", experienceRoutes);
+app.use("/project", projectRoutes);
 
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+	console.log(`Server running on port ${PORT}`);
 });
 
 app.get("/status", (_request, response) => {
-  const status = {
-    status: "OK",
-    timestamp: new Date(),
-  };
-  response.send(status);
+	const status = {
+		status: "OK",
+		timestamp: new Date(),
+	};
+	response.send(status);
 });
