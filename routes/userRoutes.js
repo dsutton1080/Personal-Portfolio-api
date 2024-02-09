@@ -14,8 +14,9 @@ router.post("/signup", async (request, response) => {
 				role: user.role,
 			},
 		});
-		response.send(responseUser);
+		response.status(200).send(responseUser);
 	} catch (error) {
+		console.error(error);
 		response.status(500).send("Internal Server Error");
 	}
 });
@@ -31,9 +32,10 @@ router.post("/login", async (request, response) => {
 		if (user.password !== userPassword) {
 			response.status(404).send("Invalid password");
 		} else {
-			response.status(200).send(user);
+			response.status(201).send(user);
 		}
 	} catch (error) {
+		console.error(error);
 		response.status(500).send("Internal Server Error");
 	}
 });
@@ -46,7 +48,7 @@ router.get("", async (request, response) => {
 				id: parseInt(userID),
 			},
 		});
-		response.send(user);
+		response.status(200).send(user);
 	} catch (error) {
 		console.error(error);
 		response.status(500).send("Internal Server Error");
@@ -59,8 +61,9 @@ router.patch("/:id", async (request, response) => {
 			where: { id: parseInt(request.params.id) },
 			data: request.body,
 		});
-		response.send(updatedUser);
+		response.status(200).send(updatedUser);
 	} catch (error) {
+		console.error(error);
 		response.status(500).send("Internal Server Error");
 	}
 });
@@ -76,7 +79,7 @@ router.get("/all", async (_request, response) => {
 				isAdmin: true,
 			},
 		});
-		response.send(users);
+		response.status(200).send(users);
 	} catch (error) {
 		console.error(error);
 		response.status(500).send("Internal Server Error");
@@ -89,8 +92,9 @@ router.patch("/change-role/:id", async (request, response) => {
 			where: { id: parseInt(request.params.id) },
 			data: request.body,
 		});
-		response.send(updatedUser);
+		response.status(200).send(updatedUser);
 	} catch (error) {
+		console.error(error);
 		response.status(500).send("Internal Server Error");
 	}
 });

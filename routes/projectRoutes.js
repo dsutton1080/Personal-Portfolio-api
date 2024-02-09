@@ -5,8 +5,9 @@ const prisma = require("../prisma");
 router.get("/all", async (_request, response) => {
 	try {
 		const projects = await prisma.project.findMany();
-		response.send(projects);
+		response.status(200).send(projects);
 	} catch (error) {
+		console.error(error);
 		response.status(500).send(error.message);
 	}
 });
@@ -19,8 +20,9 @@ router.get("/:id", async (request, response) => {
 				id: parseInt(projectID),
 			},
 		});
-		response.send(project);
+		response.status(200).send(project);
 	} catch (error) {
+		console.error(error);
 		response.status(500).send(error.message);
 	}
 });
@@ -31,8 +33,9 @@ router.post("", async (request, response) => {
 		const responseProject = await prisma.project.create({
 			data: project,
 		});
-		response.send(responseProject);
+		response.status(201).send(responseProject);
 	} catch (error) {
+		console.error(error);
 		response.status(500).send(error.message);
 	}
 });
@@ -43,8 +46,9 @@ router.patch("/:id", async (request, response) => {
 			where: { id: parseInt(request.params.id) },
 			data: request.body,
 		});
-		response.send(updatedProject);
+		response.status(200).send(updatedProject);
 	} catch (error) {
+		console.error(error);
 		response.status(500).send(error.message);
 	}
 });
@@ -54,8 +58,9 @@ router.delete("/:id", async (request, response) => {
 		const deletedProject = await prisma.project.delete({
 			where: { id: parseInt(request.params.id) },
 		});
-		response.send(deletedProject);
+		response.status(200).send(deletedProject);
 	} catch (error) {
+		console.error(error);
 		response.status(500).send(error.message);
 	}
 });
