@@ -8,8 +8,6 @@ const fs = require("fs");
 const path = require("path");
 const privKey = process.env.PRIVATE_KEY.replace(/\\n/g, "\n");
 
-console.log(process.env.CLIENT_EMAIL);
-console.log(privKey);
 const auth = new GoogleAuth({
 	credentials: {
 		client_email: process.env.CLIENT_EMAIL,

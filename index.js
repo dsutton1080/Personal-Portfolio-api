@@ -38,9 +38,20 @@ app.get("/status", (_request, response) => {
 	response.status(200).send(status);
 });
 
-process.on("SIGINT", async function () {
-	console.log("Closing down server.");
-	await dbFileRoutes.updateDbFile().then(() => {
-		process.exit();
-	});
+async function shutdown() {
+	console.log("\nClosing down server and saving db.");
+	await dbFileRoutes.updateDbFile();
+	console.log("DB file saved!");
+	process.exit();
+}
+
+process.on("SIGINT", shutdown);
+process.on("SIGTERM", shutdown);
+process.on("uncaughtException", (err) => {
+	console.error("There was an uncaught error", err);
+	shutdown();
+});
+process.on("unhandledRejection", (reason, promise) => {
+	console.error("Unhandled Rejection at:", promise, "reason:", reason);
+	shutdown();
 });
