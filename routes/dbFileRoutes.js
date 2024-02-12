@@ -7,6 +7,8 @@ const { GoogleAuth } = require("google-auth-library");
 const fs = require("fs");
 const path = require("path");
 
+console.log(process.env.CLIENT_EMAIL);
+console.log(process.env.PRIVATE_KEY);
 const auth = new GoogleAuth({
 	credentials: {
 		client_email: process.env.CLIENT_EMAIL,
