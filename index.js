@@ -35,7 +35,7 @@ app.get("/status", (_request, response) => {
 		status: "OK",
 		timestamp: new Date(),
 	};
-	response.send(status);
+	response.status(200).send(status);
 });
 
 process.on("SIGINT", async function () {

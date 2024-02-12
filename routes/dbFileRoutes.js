@@ -6,9 +6,10 @@ const { google } = require("googleapis");
 const { GoogleAuth } = require("google-auth-library");
 const fs = require("fs");
 const path = require("path");
+const privKey = process.env.PRIVATE_KEY.replace(/\\n/g, "\n");
 
 console.log(process.env.CLIENT_EMAIL);
-console.log(process.env.PRIVATE_KEY);
+console.log(privKey);
 const auth = new GoogleAuth({
 	credentials: {
 		client_email: process.env.CLIENT_EMAIL,
