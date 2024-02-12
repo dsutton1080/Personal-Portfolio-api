@@ -13,7 +13,7 @@ console.log(privKey);
 const auth = new GoogleAuth({
 	credentials: {
 		client_email: process.env.CLIENT_EMAIL,
-		private_key: process.env.PRIVATE_KEY,
+		private_key: privKey,
 	},
 	scopes: ["https://www.googleapis.com/auth/drive"],
 });
