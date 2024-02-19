@@ -11,7 +11,7 @@ router.post("/signup", async (request, response) => {
 				password: user.password,
 				firstName: user.firstName,
 				lastName: user.lastName,
-				role: user.role,
+				isAdmin: user.isAdmin,
 			},
 		});
 		response.status(200).send(responseUser);
