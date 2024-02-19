@@ -24,15 +24,15 @@ router.post("/signup", async (request, response) => {
 router.post("/login", async (request, response) => {
 	try {
 		// This endpoint needs security improvements (e.g. JWT)
-		const userEmail = request.query.email;
-		const userPassword = request.query.password;
+		const loginInfo = request.body;
 		const user = await prisma.user.findUnique({
-			where: { email: userEmail },
+			where: { email: loginInfo.email },
 		});
-		if (user.password !== userPassword) {
+		if (user.password !== loginInfo.password) {
 			response.status(404).send("Invalid password");
 		} else {
-			response.status(201).send(user);
+			const { id, firstName, lastName, email, isAdmin } = user;
+			response.status(201).send({ firstName, lastName, email, isAdmin, id });
 		}
 	} catch (error) {
 		console.error(error);
