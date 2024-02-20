@@ -23,6 +23,7 @@ app.use("/dbfile", dbFileRoutes.router);
 app.listen(PORT, () => {
 	console.log(`Server running on port ${PORT}`);
 	dbFileRoutes.getDbFile();
+	// dbFileRoutes.updateDbFile();
 
 	const interval = 8 * 60 * 60 * 1000; // 8 hours
 	setInterval(() => {

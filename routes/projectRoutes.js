@@ -14,7 +14,7 @@ router.get("/all", async (_request, response) => {
 
 router.get("/:id", async (request, response) => {
 	try {
-		const projectID = request.query.id;
+		const projectID = request.params.id;
 		const project = await prisma.project.findUnique({
 			where: {
 				id: parseInt(projectID),

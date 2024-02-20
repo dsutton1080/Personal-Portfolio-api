@@ -3,12 +3,6 @@ generator client {
   binaryTargets = ["native", "linux-arm64-openssl-3.0.x"]
 }
 
-// datasource db {
-//   provider          = "sqlserver"
-//   url               = env("DATABASE_URL")
-//   shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
-// }
-
 datasource db {
   provider = "sqlite"
   url      = "file:./dev.db"
@@ -48,11 +42,11 @@ model Experience {
 }
 
 model Project {
-  id        Int     @id @default(autoincrement())
-  title     String  @default("New Project")
-  content   String  @default("")
-  repoLink  String  @default("")
-  repoLabel String  @default("")
-  order     Int?
-  imageUrl  String?
+  id          Int     @id @default(autoincrement())
+  name        String  @default("New Project")
+  description String  @default("")
+  link        String  @default("")
+  label       String  @default("")
+  order       Int?
+  logo        String?
 }
