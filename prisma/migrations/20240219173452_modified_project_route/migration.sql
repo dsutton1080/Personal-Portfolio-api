@@ -37,12 +37,12 @@ CREATE TABLE "Experience" (
 -- CreateTable
 CREATE TABLE "Project" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "title" TEXT NOT NULL DEFAULT 'New Project',
-    "content" TEXT NOT NULL DEFAULT '',
-    "repoLink" TEXT NOT NULL DEFAULT '',
-    "repoLabel" TEXT NOT NULL DEFAULT '',
+    "name" TEXT NOT NULL DEFAULT 'New Project',
+    "description" TEXT NOT NULL DEFAULT '',
+    "link" TEXT NOT NULL DEFAULT '',
+    "label" TEXT NOT NULL DEFAULT '',
     "order" INTEGER,
-    "imageUrl" TEXT
+    "logo" TEXT
 );
 
 -- CreateIndex
