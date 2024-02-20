@@ -23,11 +23,11 @@ const drive = google.drive({
 
 router.post("", (req, res) => {
 	const fileMetadata = {
-		name: "dev.db",
+		name: "site.db",
 	};
 	const media = {
 		mimeType: "application/x-sqlite3",
-		body: fs.createReadStream("../prisma/dev.db"),
+		body: fs.createReadStream("prisma/site.db"),
 	};
 	drive.files.create(
 		{
@@ -48,7 +48,7 @@ router.post("", (req, res) => {
 
 router.get("/:id", (req, res) => {
 	const fileId = req.params.id;
-	const filePath = path.join(__dirname, "../prisma/dev.db");
+	const filePath = path.join(__dirname, "../prisma/site.db");
 
 	drive.files.get({ fileId: fileId, alt: "media" }, { responseType: "stream" }, (err, response) => {
 		if (err) {
@@ -78,7 +78,7 @@ router.patch("/:id", async (req, res) => {
 	const fileId = req.params.id;
 	const media = {
 		mimeType: "application/x-sqlite3",
-		body: fs.createReadStream("prisma/dev.db"),
+		body: fs.createReadStream("prisma/site.db"),
 	};
 	await drive.files.update({ fileId: fileId, media: media }, (err, file) => {
 		if (err) {
@@ -92,7 +92,7 @@ router.patch("/:id", async (req, res) => {
 
 const getDbFile = async () => {
 	const fileId = process.env.dbID;
-	const filePath = path.join(__dirname, "../prisma/dev.db");
+	const filePath = path.join(__dirname, "../prisma/site.db");
 
 	drive.files.get({ fileId: fileId, alt: "media" }, { responseType: "stream" }, (err, response) => {
 		if (err) {
@@ -121,7 +121,7 @@ const updateDbFile = async () => {
 	const fileId = process.env.dbID;
 	const media = {
 		mimeType: "application/x-sqlite3",
-		body: fs.createReadStream("prisma/dev.db"),
+		body: fs.createReadStream("prisma/site.db"),
 	};
 	await drive.files.update({ fileId: fileId, media: media }, (err, file) => {
 		if (err) {
