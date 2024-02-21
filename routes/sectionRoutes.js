@@ -92,7 +92,7 @@ router.get("/:id", async (request, response) => {
 				},
 			},
 			where: {
-				id: parseInt(sectionID),
+				id: sectionID,
 			},
 		});
 		response.status(200).send(section);
@@ -129,7 +129,7 @@ router.patch("/:id", async (request, response) => {
 		const sectionID = request.params.id;
 		const { contents, ...section } = request.body;
 		const updatedSection = await prisma.section.update({
-			where: { id: parseInt(sectionID) },
+			where: { id: sectionID },
 			data: {
 				...section,
 				contents: {
@@ -157,7 +157,7 @@ router.patch("/:id", async (request, response) => {
 router.delete("/:id", async (request, response) => {
 	try {
 		const deletedSection = await prisma.section.delete({
-			where: { id: parseInt(request.params.id) },
+			where: { id: request.params.id },
 		});
 		response.status(200).send(deletedSection);
 	} catch (error) {

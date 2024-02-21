@@ -45,7 +45,7 @@ router.get("", async (request, response) => {
 		const userID = request.query.id;
 		const user = await prisma.user.findUnique({
 			where: {
-				id: parseInt(userID),
+				id: userID,
 			},
 		});
 		response.status(200).send(user);
@@ -58,7 +58,7 @@ router.get("", async (request, response) => {
 router.patch("/:id", async (request, response) => {
 	try {
 		const updatedUser = await prisma.user.update({
-			where: { id: parseInt(request.params.id) },
+			where: { id: request.params.id },
 			data: request.body,
 		});
 		response.status(200).send(updatedUser);
@@ -89,7 +89,7 @@ router.get("/all", async (_request, response) => {
 router.patch("/change-role/:id", async (request, response) => {
 	try {
 		const updatedUser = await prisma.user.update({
-			where: { id: parseInt(request.params.id) },
+			where: { id: request.params.id },
 			data: request.body,
 		});
 		response.status(200).send(updatedUser);

@@ -17,7 +17,7 @@ router.get("/:id", async (request, response) => {
 		const projectID = request.params.id;
 		const project = await prisma.project.findUnique({
 			where: {
-				id: parseInt(projectID),
+				id: projectID,
 			},
 		});
 		response.status(200).send(project);
@@ -43,7 +43,7 @@ router.post("", async (request, response) => {
 router.patch("/:id", async (request, response) => {
 	try {
 		const updatedProject = await prisma.project.update({
-			where: { id: parseInt(request.params.id) },
+			where: { id: request.params.id },
 			data: request.body,
 		});
 		response.status(200).send(updatedProject);
@@ -56,7 +56,7 @@ router.patch("/:id", async (request, response) => {
 router.delete("/:id", async (request, response) => {
 	try {
 		const deletedProject = await prisma.project.delete({
-			where: { id: parseInt(request.params.id) },
+			where: { id: request.params.id },
 		});
 		response.status(200).send(deletedProject);
 	} catch (error) {

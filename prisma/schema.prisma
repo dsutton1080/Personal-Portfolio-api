@@ -4,12 +4,12 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./site.db"
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
 }
 
 model User {
-  id        Int     @id @default(autoincrement())
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
   email     String  @unique
   firstName String?
   isAdmin   Boolean @default(true)
@@ -18,7 +18,7 @@ model User {
 }
 
 model Section {
-  id        Int       @id @default(autoincrement())
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
   order     Int?
   title     String    @default("New Section")
   header    String?
@@ -27,22 +27,22 @@ model Section {
 }
 
 model Content {
-  id         Int     @id @default(autoincrement())
+  id         String  @id @default(auto()) @map("_id") @db.ObjectId
   content    String
   order      Int?
   section    Section @relation(fields: [section_id], references: [id], onDelete: Cascade)
-  section_id Int
+  section_id String  @db.ObjectId
 }
 
 model Experience {
-  id      Int    @id @default(autoincrement())
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
   title   String @default("New Experience")
   content String @default("")
   date    String @default("")
 }
 
 model Project {
-  id          Int     @id @default(autoincrement())
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
   name        String  @default("New Project")
   description String  @default("")
   link        String  @default("")
