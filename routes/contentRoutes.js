@@ -17,7 +17,7 @@ router.get("/content/:id", async (request, response) => {
 		const contentID = request.query.id;
 		const content = await prisma.content.findUnique({
 			where: {
-				id: parseInt(contentID),
+				id: contentID,
 			},
 		});
 		response.status(200).send(content);
@@ -43,7 +43,7 @@ router.post("/content", async (request, response) => {
 router.patch("/content/:id", async (request, response) => {
 	try {
 		const updatedContent = await prisma.content.update({
-			where: { id: parseInt(request.params.id) },
+			where: { id: request.params.id },
 			data: request.body,
 		});
 		response.status(200).send(updatedContent);
@@ -56,7 +56,7 @@ router.patch("/content/:id", async (request, response) => {
 router.delete("/content/:id", async (request, response) => {
 	try {
 		const deletedContent = await prisma.content.delete({
-			where: { id: parseInt(request.params.id) },
+			where: { id: request.params.id },
 		});
 		response.status(200).send(deletedContent);
 	} catch (error) {

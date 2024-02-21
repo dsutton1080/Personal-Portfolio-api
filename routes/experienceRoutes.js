@@ -17,7 +17,7 @@ router.get("/:id", async (request, response) => {
 		const experienceID = request.params.id;
 		const experience = await prisma.experience.findUnique({
 			where: {
-				id: parseInt(experienceID),
+				id: experienceID,
 			},
 		});
 		response.status(200).send(experience);
@@ -43,7 +43,7 @@ router.post("", async (request, response) => {
 router.patch("/:id", async (request, response) => {
 	try {
 		const updatedExperience = await prisma.experience.update({
-			where: { id: parseInt(request.params.id) },
+			where: { id: request.params.id },
 			data: request.body,
 		});
 		response.status(200).send(updatedExperience);
@@ -56,7 +56,7 @@ router.patch("/:id", async (request, response) => {
 router.delete("/:id", async (request, response) => {
 	try {
 		const deletedExperience = await prisma.experience.delete({
-			where: { id: parseInt(request.params.id) },
+			where: { id: request.params.id },
 		});
 		response.status(200).send(deletedExperience);
 	} catch (error) {
