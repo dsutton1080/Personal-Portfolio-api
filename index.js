@@ -12,6 +12,12 @@ const projectRoutes = require("./routes/projectRoutes");
 
 app.use(cors()); // This will set the Access-Control-Allow-Origin header to *
 app.use(express.json());
+
+app.use((req, res, next) => {
+	res.set("Cache-Control", "no-store", "no-cache", "must-revalidate", "private");
+	next();
+});
+
 app.use("/user", userRoutes);
 app.use("/section", sectionRoutes);
 app.use("/content", contentRoutes);
